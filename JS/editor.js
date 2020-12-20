@@ -1,3 +1,4 @@
+//Style functions
 function getsetCSS(css) {
   out = "";
   for (prop in css) {
@@ -77,4 +78,21 @@ function setStyle() {
 function isNumeric(str) {
   if (typeof str != "string") return false;
   return !isNaN(str) && !isNaN(parseFloat(str));
+}
+
+//Element functions
+function addElement() {
+  var iframe = document.getElementById("iframe").contentWindow.document;
+  var option = document.getElementById("n_type").value;
+  var tag_type = document.getElementById("n_class-id").value;
+  var tag = document.getElementById("n_class-id-name").value;
+  var name = document.getElementById("n_name").value;
+  var element = iframe.createElement(option);
+  element.innerHTML = name;
+  if (tag_type == "Class") {
+    element.classList.add(tag);
+  } else if (tag_type == "ID") {
+    element.id = tag;
+  }
+  iframe.body.appendChild(element);
 }
