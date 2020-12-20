@@ -6,6 +6,52 @@
     <title>HTML, CSS Editor</title>
   </head>
   <body>
-    <iframe src="iframes/navbar.html" frameborder="0"></iframe>
+    <iframe
+      src="iframes/empty.html"
+      frameborder="1"
+      height="500"
+      width="888"
+    ></iframe>
+    <br />
+    <br />
+    <div class="Create">
+      New Element
+      <select name="n_type" id="n_type">
+        <option value="p">P</option>
+        <option value="h1">h1</option>
+        <option value="h2">h2</option>
+        <option value="h3">h3</option>
+        <option value="h4">h4</option>
+        <option value="h5">h5</option>
+        <option value="h6">h6</option>
+        <option value="img">img</option>
+        <option value="button">button</option>
+      </select>
+      <input id="n_name" type="text" placeholder="Text of Element" />
+      with
+      <select name="n_class-id" id="n_class-id">
+        <option value="Class">Class</option>
+        <option value="ID">ID</option>
+      </select>
+      <input id="n_class-id-name" type="text" placeholder="Name of Class/Id" />
+      <button id="n_button_create">Create</button>
+    </div>
+    <br />
+    <div class="Style">
+      Edit Style of
+      <select name="s_class-id" id="s_class-id">
+        <option value="Class">Class</option>
+        <option value="ID">ID</option>
+        <option value="Element">Element</option>
+      </select>
+      <input
+        id="s_class-id-name"
+        type="text"
+        placeholder="Name of Class/Id/Element"
+      />
+      to
+      <br />
+      <textarea name="" id="" cols="50" rows="15"></textarea>
+    </div>
   </body>
 </html>
