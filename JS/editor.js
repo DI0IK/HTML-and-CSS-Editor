@@ -84,18 +84,21 @@ function isNumeric(str) {
 function addElement() {
   var iframe = document.getElementById("iframe").contentWindow.document;
   var option = document.getElementById("n_type").value;
-  var tag_type = document.getElementById("n_class-id").value;
-  var tag = document.getElementById("n_class-id-name").value;
+  var id = document.getElementById("n_id-name").value;
+  var class_name = document.getElementById("n_class-name").value;
   var name = document.getElementById("n_name").value;
   var element = iframe.createElement(option);
-  if (tag == "" || name == "") {
+  if (name == "") {
     return;
   }
   element.innerHTML = name;
-  if (tag_type == "Class") {
-    element.classList.add(tag);
-  } else if (tag_type == "ID") {
-    element.id = tag;
+  if (class_name != "") {
+    element.classList.add(class_name);
+  } else {
+    return;
+  }
+  if (id != "") {
+    element.id = id;
   }
   iframe.body.appendChild(element);
 }
