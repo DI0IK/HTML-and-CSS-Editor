@@ -46,9 +46,11 @@ function update_s_css() {
       cssField.value = "";
     }
   }
+  showNameText();
 }
 
 function setStyle() {
+  updateName();
   var name = document.getElementById("s_class-id-name").value;
   var select_in = document.getElementById("s_class-id");
   var selected = select_in.value;
@@ -89,7 +91,22 @@ function addElement(pos) {
   var class_name = document.getElementById("n_class-name").value;
   var name = document.getElementById("n_name").value;
   var element = iframe.createElement(option);
-
+  if (option == "br") {
+    if (pos == "1")
+      iframe.body.insertBefore(
+        element,
+        iframe.getElementById(document.getElementById("n_before_id").value)
+      );
+    if (pos == "3")
+      iframe.body.insertBefore(
+        element,
+        iframe.getElementsByClassName(
+          document.getElementById("n_before_class").value
+        )[document.getElementById("n_before_class_num").value + 1]
+      );
+    if (pos == "2") iframe.body.appendChild(element);
+    return;
+  }
   if (class_name != "") {
     element.classList.add(class_name);
   } else {
@@ -122,4 +139,41 @@ function addElement(pos) {
       )[document.getElementById("n_before_class_num").value + 1]
     );
   if (pos == "2") iframe.body.appendChild(element);
+}
+
+// Name function
+function showNameText() {
+  var textfield = document.getElementById("text_name");
+  var iframe = document.getElementById("iframe").contentWindow.document;
+  var name = document.getElementById("s_class-id-name").value;
+  var select_in = document.getElementById("s_class-id");
+  var selected = select_in.value;
+  if (selected == "Class") {
+    var element = iframe.getElementsByClassName(name);
+    textfield.value = element[0].innerHTML;
+  } else if (selected == "ID") {
+    var element = iframe.getElementById(name);
+    textfield.value = element.innerHTML;
+  } else if (selected == "Element") {
+    var element = iframe.getElementsByTagName(name);
+    textfield.value = element[0].innerHTML;
+  }
+}
+
+function updateName() {
+  var textfield = document.getElementById("text_name");
+  var iframe = document.getElementById("iframe").contentWindow.document;
+  var name = document.getElementById("s_class-id-name").value;
+  var select_in = document.getElementById("s_class-id");
+  var selected = select_in.value;
+  if (selected == "Class") {
+    var element = iframe.getElementsByClassName(name);
+    element[0].innerHTML = textfield.value;
+  } else if (selected == "ID") {
+    var element = iframe.getElementById(name);
+    element.innerHTML = textfield.value;
+  } else if (selected == "Element") {
+    var element = iframe.getElementsByTagName(name);
+    element[0].innerHTML = textfield.value;
+  }
 }

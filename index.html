@@ -29,12 +29,14 @@
         <option value="h6">h6</option>
         <option value="img">img</option>
         <option value="button">button</option>
+        <option value="br">br</option>
       </select>
       <input id="n_name" type="text" placeholder="*Text of element" />
       <input id="n_img-url" type="text" placeholder="*Img URL" />
       with
       <input id="n_class-name" type="text" placeholder="*Class" />
       <input id="n_id-name" type="text" placeholder="Id" />
+      <br />
       <br />
       <button id="n_button_create" onclick="addElement('2')">
         Create at end
@@ -75,8 +77,11 @@
       />
       to
       <br />
+      CSS:
       <textarea name="s_css" id="s_css" cols="50" rows="15"></textarea>
       <br />
+      Text:
+      <input id="text_name" type="text" />
       <button id="s_set" onclick="setStyle()">Confirm</button>
     </div>
   </body>

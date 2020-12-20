@@ -1,5 +1,6 @@
 body {
   background-color: black;
+  margin-left: 3em;
 }
 iframe {
   background-color: white;
@@ -16,4 +17,9 @@ button {
 }
 ::placeholder {
   color: rgb(161, 161, 161);
+}
+
+textarea,
+input {
+  outline: none;
 }
