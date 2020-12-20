@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="JS/editor.js"></script>
     <title>HTML, CSS Editor</title>
   </head>
   <body>
@@ -11,6 +12,7 @@
       frameborder="1"
       height="500"
       width="888"
+      id="iframe"
     ></iframe>
     <br />
     <br />
@@ -39,7 +41,7 @@
     <br />
     <div class="Style">
       Edit Style of
-      <select name="s_class-id" id="s_class-id">
+      <select name="s_class-id" id="s_class-id" onchange="update_s_css()">
         <option value="Class">Class</option>
         <option value="ID">ID</option>
         <option value="Element">Element</option>
@@ -48,10 +50,13 @@
         id="s_class-id-name"
         type="text"
         placeholder="Name of Class/Id/Element"
+        onchange="update_s_css()"
       />
       to
       <br />
-      <textarea name="" id="" cols="50" rows="15"></textarea>
+      <textarea name="s_css" id="s_css" cols="50" rows="15"></textarea>
+      <br />
+      <button id="s_set" onclick="setStyle()">Confirm</button>
     </div>
   </body>
 </html>
