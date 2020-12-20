@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="JS/editor.js"></script>
+    <link rel="stylesheet" href="CSS/style.css" />
     <title>HTML, CSS Editor</title>
   </head>
   <body>
@@ -30,10 +31,33 @@
         <option value="button">button</option>
       </select>
       <input id="n_name" type="text" placeholder="*Text of element" />
+      <input id="n_img-url" type="text" placeholder="*Img URL" />
       with
       <input id="n_class-name" type="text" placeholder="*Class" />
       <input id="n_id-name" type="text" placeholder="Id" />
-      <button id="n_button_create" onclick="addElement()">Create</button>
+      <br />
+      <button id="n_button_create" onclick="addElement('2')">
+        Create at end
+      </button>
+      or
+      <br />
+      <button id="n_button_create" onclick="addElement('1')">
+        Create before element with ID
+      </button>
+      <input id="n_before_id" type="text" placeholder="ID" />
+      or
+      <br />
+      <button id="n_button_create" onclick="addElement('3')">
+        Create before element with Class
+      </button>
+      <input id="n_before_class" type="text" placeholder="Class" />
+      <input
+        type="number"
+        min="0"
+        name="n_before_class_num"
+        id="n_before_class_num"
+        placeholder="Position"
+      />
     </div>
     <br />
     <div class="Style">

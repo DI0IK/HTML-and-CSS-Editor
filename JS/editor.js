@@ -81,17 +81,15 @@ function isNumeric(str) {
 }
 
 //Element functions
-function addElement() {
+function addElement(pos) {
   var iframe = document.getElementById("iframe").contentWindow.document;
   var option = document.getElementById("n_type").value;
   var id = document.getElementById("n_id-name").value;
+  var src = document.getElementById("n_img-url").value;
   var class_name = document.getElementById("n_class-name").value;
   var name = document.getElementById("n_name").value;
   var element = iframe.createElement(option);
-  if (name == "") {
-    return;
-  }
-  element.innerHTML = name;
+
   if (class_name != "") {
     element.classList.add(class_name);
   } else {
@@ -100,5 +98,28 @@ function addElement() {
   if (id != "") {
     element.id = id;
   }
-  iframe.body.appendChild(element);
+  if (option == "img") {
+    if (src != "") {
+      element.src = src;
+    } else {
+      console.log(src + "2");
+      return;
+    }
+  } else if (name == "") {
+    return;
+  }
+  element.innerHTML = name;
+  if (pos == "1")
+    iframe.body.insertBefore(
+      element,
+      iframe.getElementById(document.getElementById("n_before_id").value)
+    );
+  if (pos == "3")
+    iframe.body.insertBefore(
+      element,
+      iframe.getElementsByClassName(
+        document.getElementById("n_before_class").value
+      )[document.getElementById("n_before_class_num").value + 1]
+    );
+  if (pos == "2") iframe.body.appendChild(element);
 }

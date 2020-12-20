@@ -1,0 +1,19 @@
+body {
+  background-color: black;
+}
+iframe {
+  background-color: white;
+}
+div {
+  color: white;
+}
+textarea,
+input,
+select,
+button {
+  background-color: rgb(58, 58, 58);
+  color: white;
+}
+::placeholder {
+  color: rgb(161, 161, 161);
+}
