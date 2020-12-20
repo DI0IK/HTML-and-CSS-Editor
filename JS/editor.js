@@ -88,6 +88,9 @@ function addElement() {
   var tag = document.getElementById("n_class-id-name").value;
   var name = document.getElementById("n_name").value;
   var element = iframe.createElement(option);
+  if (tag == "" || name == "") {
+    return;
+  }
   element.innerHTML = name;
   if (tag_type == "Class") {
     element.classList.add(tag);
