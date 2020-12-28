@@ -195,6 +195,7 @@ function select_list() {
     var class_name = sessionStorage.getItem(list.value).split("CLASS:")[1];
     set_2.value = class_name;
   }
+  showNameText();
 }
 
 function add_list(id, class_name, type) {
