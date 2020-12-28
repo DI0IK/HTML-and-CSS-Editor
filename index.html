@@ -41,7 +41,7 @@
       <button id="n_button_create" onclick="addElement('2')">
         Create at end
       </button>
-      or
+      <!--or
       <br />
       <button id="n_button_create" onclick="addElement('1')">
         Create in front of element with ID
@@ -59,7 +59,16 @@
         name="n_before_class_num"
         id="n_before_class_num"
         placeholder="Position"
-      />
+      />-->
+      <br />
+      <br />
+      <select
+        name="elements"
+        id="elements_list"
+        onchange="select_list()"
+      ></select>
+      <button id="m_up">Up</button>
+      <button id="m_down">Down</button>
     </div>
     <br />
     <div class="Style">

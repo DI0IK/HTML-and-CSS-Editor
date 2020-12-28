@@ -102,7 +102,7 @@ function addElement(pos) {
         element,
         iframe.getElementsByClassName(
           document.getElementById("n_before_class").value
-        )[document.getElementById("n_before_class_num").value + 1]
+        )[document.getElementById("n_before_class_num").value - 1]
       );
     if (pos == "2") iframe.body.appendChild(element);
     return;
@@ -139,6 +139,7 @@ function addElement(pos) {
       )[document.getElementById("n_before_class_num").value + 1]
     );
   if (pos == "2") iframe.body.appendChild(element);
+  add_list(id, class_name, option);
 }
 
 // Name function
@@ -166,6 +167,9 @@ function updateName() {
   var name = document.getElementById("s_class-id-name").value;
   var select_in = document.getElementById("s_class-id");
   var selected = select_in.value;
+  if (name == "") {
+    return;
+  }
   if (selected == "Class") {
     var element = iframe.getElementsByClassName(name);
     element[0].innerHTML = textfield.value;
@@ -175,5 +179,37 @@ function updateName() {
   } else if (selected == "Element") {
     var element = iframe.getElementsByTagName(name);
     element[0].innerHTML = textfield.value;
+  }
+}
+
+function select_list() {
+  var list = document.getElementById("elements_list");
+  var selected = list.value;
+  var set_1 = document.getElementById("s_class-id");
+  var set_2 = document.getElementById("s_class-id-name");
+  set_2.value = sessionStorage.getItem(list.value);
+  if (sessionStorage.getItem(list.value).startsWith("ID:")) {
+    var id = sessionStorage.getItem(list.value).split("ID:")[1];
+    set_2.value = id;
+  } else if (sessionStorage.getItem(list.value).startsWith("CLASS:")) {
+    var class_name = sessionStorage.getItem(list.value).split("CLASS:")[1];
+    set_2.value = class_name;
+  }
+}
+
+function add_list(id, class_name, type) {
+  var list = document.getElementById("elements_list");
+  var num = list.length + 1;
+  var element = document.createElement("option");
+  element.innerHTML = type + ":" + num;
+  element.value = num;
+  if (id != "") {
+    sessionStorage.setItem(num, "ID:" + id);
+    list.innerHTML.appendChild(element);
+  } else if (class_name != "") {
+    sessionStorage.setItem(num, "CLASS:" + class_name);
+    list.appendChild(element);
+  } else {
+    console.log("none");
   }
 }
