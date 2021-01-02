@@ -96,4 +96,11 @@ function set_html(value) {
 
 function onload() {
   set_html("");
+  if (
+    navigator.userAgent.match(
+      /(iPhone|iPod|iPad|blackberry|android|Kindle|htc|lg|midp|mmp|mobile|nokia|opera mini|palm|pocket|psp|sgh|smartphone|symbian|treo mini|Playstation Portable|SonyEricsson|Samsung|MobileExplorer|PalmSource|Benq|Windows Phone|Windows Mobile|IEMobile|Windows CE|Nintendo Wii)/i
+    )
+  ) {
+    window.location.href = "mobile.html";
+  }
 }
