@@ -1,8 +1,23 @@
+body {
+  color: white;
+  background-color: black;
+}
+button {
+  color: white;
+  background-color: rgb(83, 83, 83);
+  outline-style: none;
+}
+textarea {
+  background-color: rgb(99, 99, 99);
+  color: white;
+}
 iframe {
-  border-color: black;
-  border-width: 10px;
+  border-color: green;
+  border-width: 5px;
+  background-color: white;
 }
 
 ::placeholder {
   zoom: 10;
+  color: rgb(138, 138, 138);
 }
