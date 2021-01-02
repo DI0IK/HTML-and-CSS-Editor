@@ -1,6 +1,7 @@
 body {
   color: white;
   background-color: black;
+  outline-style: none;
 }
 button {
   color: white;
@@ -10,6 +11,7 @@ button {
 textarea {
   background-color: rgb(99, 99, 99);
   color: white;
+  outline-style: none;
 }
 iframe {
   border-color: green;

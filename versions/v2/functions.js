@@ -227,6 +227,7 @@ function updateFontList() {
     var element = document.createElement("option");
     element.innerHTML = font;
     element.value = font;
+    element.style.cssText = "font-family: " + font;
     list.appendChild(element);
   });
 }
