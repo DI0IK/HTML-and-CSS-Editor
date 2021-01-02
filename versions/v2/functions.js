@@ -93,3 +93,7 @@ function set_html(value) {
     "iframe"
   ).contentWindow.document.body.innerHTML = value;
 }
+
+function onload() {
+  set_html("");
+}
