@@ -3,9 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="functions.js"></script>
     <title>HTML and CSS Editor</title>
   </head>
   <body>
-    <iframe src="../../iframes/empty.html" frameborder="0"></iframe>
+    <iframe
+      src="../../iframes/empty.html"
+      frameborder="1"
+      height="500"
+      width="888"
+      id="iframe"
+    ></iframe>
+    <br />
+    <button onclick="show_html()" id="show_html">show HTML Code</button>
+    <br />
+    <br id="space_html" />
+    <button onclick="show_css()" id="show_css">show CSS Code</button>
+    <br />
+    <br id="space_css" />
   </body>
 </html>
