@@ -103,11 +103,13 @@ function onload() {
     window.location.href = "mobile.html";
   }
   iframe = document.getElementById("iframe").contentWindow.document;
-  iframe.documentElement.innerHTML =
-    iframe.documentElement.innerHTML.split("</head>")[0] +
-    "</head>" +
-    localStorage.getItem("html-code");
-  iframe.getElementById("style").innerHTML = localStorage.getItem("css-code");
+  if (localStorage.getItem("html-code") != null)
+    iframe.documentElement.innerHTML =
+      iframe.documentElement.innerHTML.split("</head>")[0] +
+      "</head>" +
+      localStorage.getItem("html-code");
+  if (localStorage.getItem("css-code") != null)
+    iframe.getElementById("style").innerHTML = localStorage.getItem("css-code");
 }
 
 function autosave() {
