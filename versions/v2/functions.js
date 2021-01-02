@@ -1,3 +1,22 @@
+function onload() {
+  if (
+    navigator.userAgent.match(
+      /(iPhone|iPod|iPad|blackberry|android|Kindle|htc|lg|midp|mmp|mobile|nokia|opera mini|palm|pocket|psp|sgh|smartphone|symbian|treo mini|Playstation Portable|SonyEricsson|Samsung|MobileExplorer|PalmSource|Benq|Windows Phone|Windows Mobile|IEMobile|Windows CE|Nintendo Wii)/i
+    )
+  ) {
+    window.location.href = "mobile.html";
+  }
+  iframe = document.getElementById("iframe").contentWindow.document;
+  if (localStorage.getItem("html-code") != null)
+    iframe.documentElement.innerHTML =
+      iframe.documentElement.innerHTML.split("</head>")[0] +
+      "</head>" +
+      localStorage.getItem("html-code");
+  if (localStorage.getItem("css-code") != null)
+    iframe.getElementById("style").innerHTML = localStorage.getItem("css-code");
+  updateFontList();
+}
+
 function show_html() {
   var button = document.getElementById("show_html");
   var textfield = document.createElement("textarea");
@@ -94,24 +113,6 @@ function set_html(value) {
   autosave();
 }
 
-function onload() {
-  if (
-    navigator.userAgent.match(
-      /(iPhone|iPod|iPad|blackberry|android|Kindle|htc|lg|midp|mmp|mobile|nokia|opera mini|palm|pocket|psp|sgh|smartphone|symbian|treo mini|Playstation Portable|SonyEricsson|Samsung|MobileExplorer|PalmSource|Benq|Windows Phone|Windows Mobile|IEMobile|Windows CE|Nintendo Wii)/i
-    )
-  ) {
-    window.location.href = "mobile.html";
-  }
-  iframe = document.getElementById("iframe").contentWindow.document;
-  if (localStorage.getItem("html-code") != null)
-    iframe.documentElement.innerHTML =
-      iframe.documentElement.innerHTML.split("</head>")[0] +
-      "</head>" +
-      localStorage.getItem("html-code");
-  if (localStorage.getItem("css-code") != null)
-    iframe.getElementById("style").innerHTML = localStorage.getItem("css-code");
-}
-
 function autosave() {
   var html = document.getElementById("iframe").contentWindow.document.body
     .outerHTML;
@@ -158,4 +159,74 @@ function download_text(filename, text) {
   element.click();
 
   document.body.removeChild(element);
+}
+function updateFontList() {
+  fonts = [
+    "Arial",
+    "Arial Black",
+    "Bahnschrift",
+    "Calibri",
+    "Cambria",
+    "Cambria Math",
+    "Candara",
+    "Comic Sans MS",
+    "Consolas",
+    "Constantia",
+    "Corbel",
+    "Courier New",
+    "Ebrima",
+    "Franklin Gothic Medium",
+    "Gabriola",
+    "Gadugi",
+    "Georgia",
+    "HoloLens MDL2 Assets",
+    "Impact",
+    "Ink Free",
+    "Javanese Text",
+    "Leelawadee UI",
+    "Lucida Console",
+    "Lucida Sans Unicode",
+    "Malgun Gothic",
+    "Marlett",
+    "Microsoft Himalaya",
+    "Microsoft JhengHei",
+    "Microsoft New Tai Lue",
+    "Microsoft PhagsPa",
+    "Microsoft Sans Serif",
+    "Microsoft Tai Le",
+    "Microsoft YaHei",
+    "Microsoft Yi Baiti",
+    "MingLiU-ExtB",
+    "Mongolian Baiti",
+    "MS Gothic",
+    "MV Boli",
+    "Myanmar Text",
+    "Nirmala UI",
+    "Palatino Linotype",
+    "Segoe MDL2 Assets",
+    "Segoe Print",
+    "Segoe Script",
+    "Segoe UI",
+    "Segoe UI Historic",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "SimSun",
+    "Sitka",
+    "Sylfaen",
+    "Symbol",
+    "Tahoma",
+    "Times New Roman",
+    "Trebuchet MS",
+    "Verdana",
+    "Webdings",
+    "Wingdings",
+    "Yu Gothic",
+  ];
+  var list = document.getElementById("font_list");
+  fonts.forEach((font) => {
+    var element = document.createElement("option");
+    element.innerHTML = font;
+    element.value = font;
+    list.appendChild(element);
+  });
 }
