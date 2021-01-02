@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function set_html() {
+        var html = document.getElementById("html_file").files[0];
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          localStorage.setItem(
+            "html-code",
+            event.target.result
+              .split("</head>")[1]
+              .split("</html>")[0]
+              .replace(/\n\s*\n/g, "\n")
+          );
+        };
+        reader.onerror = (error) => reject(error);
+        reader.readAsText(html);
+      }
+      function set_css() {
+        var css = document.getElementById("css_file").files[0];
+        const reader = new FileReader();
+        reader.onload = (event) =>
+          localStorage.setItem("css-code", event.target.result);
+        reader.onerror = (error) => reject(error);
+        reader.readAsText(css);
+      }
+    </script>
+  </head>
+  <body>
+    <input
+      type="file"
+      name=""
+      id="html_file"
+      accept=".html"
+      onchange="set_html()"
+    />
+    <input
+      type="file"
+      name=""
+      id="css_file"
+      accept=".css"
+      onchange="set_css()"
+    />
+    <br />
+  </body>
+</html>

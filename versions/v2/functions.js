@@ -80,7 +80,7 @@ function refresh_html() {
     html_code =
       html_code.split("<!-- Code injected by live-server -->")[0] + "</body>";
   }
-  html_area.value = html_code;
+  html_area.value = html_code.replace(/\n\s*\n/g, "\n");
 }
 
 function refresh_css() {
@@ -230,4 +230,8 @@ function updateFontList() {
     element.style.cssText = "font-family: " + font;
     list.appendChild(element);
   });
+}
+
+function upload() {
+  open("upload.html", "Upload", "height=400,width=400,resizable=no");
 }
