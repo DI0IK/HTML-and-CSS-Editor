@@ -56,10 +56,10 @@ function refresh_txtareas() {
 function refresh_html() {
   html_area = document.getElementById("html_code");
   html_code = document.getElementById("iframe").contentWindow.document.body
-    .innerHTML;
+    .outerHTML;
   if (html_code.includes("<!-- Code injected by live-server -->")) {
     html_code =
-      html_code.split("<!-- Code injected by live-server -->")[0] + "";
+      html_code.split("<!-- Code injected by live-server -->")[0] + "</body>";
   }
   html_area.value = html_code;
 }
@@ -73,29 +73,28 @@ function refresh_css() {
 
 function update_css() {
   set_css(document.getElementById("css_code").value);
-  //refresh_txtareas();
 }
 
 function update_html() {
   set_html(document.getElementById("html_code").value);
   console.log;
-  //refresh_txtareas();
 }
 
 function set_css(value) {
   document
     .getElementById("iframe")
     .contentWindow.document.getElementById("style").innerHTML = value;
+  autosave();
 }
 
 function set_html(value) {
-  document.getElementById(
-    "iframe"
-  ).contentWindow.document.body.innerHTML = value;
+  iframe = document.getElementById("iframe").contentWindow.document;
+  iframe.documentElement.innerHTML =
+    iframe.documentElement.innerHTML.split("</head>")[0] + "</head>" + value;
+  autosave();
 }
 
 function onload() {
-  set_html("");
   if (
     navigator.userAgent.match(
       /(iPhone|iPod|iPad|blackberry|android|Kindle|htc|lg|midp|mmp|mobile|nokia|opera mini|palm|pocket|psp|sgh|smartphone|symbian|treo mini|Playstation Portable|SonyEricsson|Samsung|MobileExplorer|PalmSource|Benq|Windows Phone|Windows Mobile|IEMobile|Windows CE|Nintendo Wii)/i
@@ -103,4 +102,58 @@ function onload() {
   ) {
     window.location.href = "mobile.html";
   }
+  iframe = document.getElementById("iframe").contentWindow.document;
+  iframe.documentElement.innerHTML =
+    iframe.documentElement.innerHTML.split("</head>")[0] +
+    "</head>" +
+    localStorage.getItem("html-code");
+  iframe.getElementById("style").innerHTML = localStorage.getItem("css-code");
+}
+
+function autosave() {
+  var html = document.getElementById("iframe").contentWindow.document.body
+    .outerHTML;
+  var css = document
+    .getElementById("iframe")
+    .contentWindow.document.getElementById("style").innerHTML;
+  localStorage.setItem("html-code", html);
+  localStorage.setItem("css-code", css);
+}
+
+function clear_page() {
+  localStorage.setItem("html-code", "");
+  localStorage.setItem("css-code", "");
+  location.reload();
+}
+
+function download() {
+  var html_before = `<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <link rel="stylesheet" href="style.css" />
+    </head>\n`;
+  var html_after = `\n</html>`;
+  var html_code = localStorage.getItem("html-code");
+  var css_code = localStorage.getItem("css-code");
+  download_text("html.html", html_before + html_code + html_after);
+  download_text("style.css", css_code);
+}
+
+function download_text(filename, text) {
+  var element = document.createElement("a");
+  element.setAttribute(
+    "href",
+    "data:text/plain;charset=utf-8," + encodeURIComponent(text)
+  );
+  element.setAttribute("download", filename);
+
+  element.style.display = "none";
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
 }
