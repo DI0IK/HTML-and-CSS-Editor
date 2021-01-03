@@ -10,7 +10,7 @@ function onload() {
   update();
 }
 function update() {
-  if (document.getElementById("html-code") != null) {
+  if (document.getElementById("html_code") != null) {
     update_css();
     update_html();
   }
