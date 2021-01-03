@@ -17,8 +17,21 @@ function onload() {
   updateFontList();
 }
 
+function show_advanced() {
+  show_html();
+  show_css();
+  document.getElementById("show_adv").innerHTML = "disable Advanced mode";
+  document.getElementById("show_adv").onclick = hide_advanced;
+}
+
+function hide_advanced() {
+  hide_html();
+  hide_css();
+  document.getElementById("show_adv").innerHTML = "enable Advanced mode";
+  document.getElementById("show_adv").onclick = show_advanced;
+}
+
 function show_html() {
-  var button = document.getElementById("show_html");
   var textfield = document.createElement("textarea");
   textfield.id = "html_code";
   textfield.rows = "25";
@@ -26,21 +39,15 @@ function show_html() {
   textfield.placeholder = "HTML";
   textfield.onchange = update_html;
   document.body.insertBefore(textfield, document.getElementById("space"));
-  button.onclick = hide_html;
-  button.innerHTML = "hide HTML Code";
   refresh_txtareas();
 }
 
 function hide_html() {
-  var button = document.getElementById("show_html");
   var textfield = document.getElementById("html_code");
   document.body.removeChild(textfield);
-  button.onclick = show_html;
-  button.innerHTML = "show HTML Code";
 }
 
 function show_css() {
-  var button = document.getElementById("show_css");
   var textfield = document.createElement("textarea");
   textfield.id = "css_code";
   textfield.rows = "25";
@@ -48,17 +55,12 @@ function show_css() {
   textfield.placeholder = "CSS";
   textfield.onchange = update_css;
   document.body.insertBefore(textfield, document.getElementById("space"));
-  button.onclick = hide_css;
-  button.innerHTML = "hide CSS Code";
   refresh_txtareas();
 }
 
 function hide_css() {
-  var button = document.getElementById("show_css");
   var textfield = document.getElementById("css_code");
   document.body.removeChild(textfield);
-  button.onclick = show_css;
-  button.innerHTML = "show CSS Code";
 }
 
 function refresh_txtareas() {
