@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Element</title>
+    <script src="new_elements.js"></script>
+  </head>
+  <body onload="onload()">
+    <p>
+      Element type:
+      <select name="Type" id="type" onchange="type_change()">
+        <option value="-">Select type</option>
+        <option value="p">Text</option>
+        <option value="h1">Title 1 (bigest)</option>
+        <option value="h2">Title 2</option>
+        <option value="h3">Title 3</option>
+        <option value="h4">Title 4</option>
+        <option value="h5">Title 5</option>
+        <option value="h6">Title 6 (smalest)</option>
+        <option value="ul">List</option>
+        <option value="ol">List (numbered)</option>
+        <option value="li">List element</option>
+        <option value="a">Link</option>
+        <option value="img">Image</option>
+        <option value="iframe">iframe</option>
+        <option value="button">Button</option>
+        <option value="select">Select list</option>
+        <option value="option">select option</option>
+        <option value="textarea">Textarea</option>
+        <option value="other">other</option>
+      </select>
+      <input
+        hidden
+        type="text"
+        name="other"
+        id="type_other"
+        placeholder="type"
+      />
+    </p>
+    <p hidden id="text_id">Id: <input type="text" name="id" id="input_id" /></p>
+    <p hidden id="text_class">
+      Class: <input type="text" name="class" id="input_class" />
+    </p>
+    <p><button id="btn_apply" disabled>Apply</button></p>
+  </body>
+</html>

@@ -178,3 +178,7 @@ function upload() {
 function font_list() {
   open("popups/fonts.html", "Fonts", "height=400,width=400,resizable=no");
 }
+
+function new_element() {
+  open("popups/new.html", "New", "height=400,width=400,resizable=no");
+}
