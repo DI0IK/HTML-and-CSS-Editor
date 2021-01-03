@@ -130,3 +130,12 @@ function apply() {
       "\n</body>"
   );
 }
+
+function change_text() {
+  console.log(input_text.value);
+  if (input_text.value != "") {
+    document.getElementById("btn_apply").disabled = false;
+  } else {
+    document.getElementById("btn_apply").disabled = true;
+  }
+}

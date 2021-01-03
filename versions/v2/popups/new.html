@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Element</title>
     <script src="new_elements.js"></script>
+    <link rel="stylesheet" href="../style.css" />
   </head>
   <body onload="onload()">
     <p>
@@ -39,7 +40,14 @@
       />
     </p>
     <p hidden id="text_text">
-      Text: <input type="text" name="text" id="input_text" />
+      Text:
+      <input
+        type="text"
+        name="text"
+        id="input_text"
+        onchange="change_text()"
+        oninput="change_text()"
+      />
     </p>
     <p hidden id="text_id">Id: <input type="text" name="id" id="input_id" /></p>
     <p hidden id="text_class">
