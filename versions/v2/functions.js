@@ -6,6 +6,11 @@ function onload() {
   ) {
     window.location.href = "mobile.html";
   }
+  console.log("init");
+  window.addEventListener("focus", focus);
+  update();
+}
+function update() {
   iframe = document.getElementById("iframe").contentWindow.document;
   if (localStorage.getItem("html-code") != null)
     iframe.documentElement.innerHTML =
@@ -14,7 +19,10 @@ function onload() {
       localStorage.getItem("html-code");
   if (localStorage.getItem("css-code") != null)
     iframe.getElementById("style").innerHTML = localStorage.getItem("css-code");
-  //updateFontList();
+}
+function focus() {
+  console.log("reload");
+  update();
 }
 
 function show_advanced() {
@@ -162,82 +170,11 @@ function download_text(filename, text) {
 
   document.body.removeChild(element);
 }
-function updateFontList() {
-  fonts = [
-    "Arial",
-    "Arial Black",
-    "Bahnschrift",
-    "Calibri",
-    "Cambria",
-    "Cambria Math",
-    "Candara",
-    "Comic Sans MS",
-    "Consolas",
-    "Constantia",
-    "Corbel",
-    "Courier New",
-    "Ebrima",
-    "Franklin Gothic Medium",
-    "Gabriola",
-    "Gadugi",
-    "Georgia",
-    "HoloLens MDL2 Assets",
-    "Impact",
-    "Ink Free",
-    "Javanese Text",
-    "Leelawadee UI",
-    "Lucida Console",
-    "Lucida Sans Unicode",
-    "Malgun Gothic",
-    "Marlett",
-    "Microsoft Himalaya",
-    "Microsoft JhengHei",
-    "Microsoft New Tai Lue",
-    "Microsoft PhagsPa",
-    "Microsoft Sans Serif",
-    "Microsoft Tai Le",
-    "Microsoft YaHei",
-    "Microsoft Yi Baiti",
-    "MingLiU-ExtB",
-    "Mongolian Baiti",
-    "MS Gothic",
-    "MV Boli",
-    "Myanmar Text",
-    "Nirmala UI",
-    "Palatino Linotype",
-    "Segoe MDL2 Assets",
-    "Segoe Print",
-    "Segoe Script",
-    "Segoe UI",
-    "Segoe UI Historic",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "SimSun",
-    "Sitka",
-    "Sylfaen",
-    "Symbol",
-    "Tahoma",
-    "Times New Roman",
-    "Trebuchet MS",
-    "Verdana",
-    "Webdings",
-    "Wingdings",
-    "Yu Gothic",
-  ];
-  var list = document.getElementById("font_list");
-  fonts.forEach((font) => {
-    var element = document.createElement("option");
-    element.innerHTML = font;
-    element.value = font;
-    element.style.cssText = "font-family: " + font;
-    list.appendChild(element);
-  });
-}
 
 function upload() {
   open("popups/upload.html", "Upload", "height=400,width=400,resizable=no");
 }
 
 function font_list() {
-  open("popups/fonts.html");
+  open("popups/fonts.html", "Fonts", "height=400,width=400,resizable=no");
 }
