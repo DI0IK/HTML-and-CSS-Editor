@@ -115,4 +115,18 @@ function type_change() {
   }
 }
 
-function apply() {}
+function apply() {
+  var o_html = localStorage.getItem("html-code");
+  localStorage.setItem(
+    "html-code",
+    o_html.split("</body>")[0] +
+      "<" +
+      type.value +
+      ">" +
+      input_text.value +
+      "</" +
+      type.value +
+      ">" +
+      "\n</body>"
+  );
+}

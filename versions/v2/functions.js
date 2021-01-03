@@ -6,11 +6,14 @@ function onload() {
   ) {
     window.location.href = "mobile.html";
   }
-  console.log("init");
   window.addEventListener("focus", focus);
   update();
 }
 function update() {
+  if (document.getElementById("html-code") != null) {
+    update_css();
+    update_html();
+  }
   iframe = document.getElementById("iframe").contentWindow.document;
   if (localStorage.getItem("html-code") != null)
     iframe.documentElement.innerHTML =
@@ -19,9 +22,29 @@ function update() {
       localStorage.getItem("html-code");
   if (localStorage.getItem("css-code") != null)
     iframe.getElementById("style").innerHTML = localStorage.getItem("css-code");
+  html_area = iframe.documentElement.innerHTML.split("</head>")[1];
+  var list = document.getElementById("move_elem");
+  list.innerHTML = "";
+  elemlist = html_area.split(/\r\n|\r|\n/);
+  var typelist = "";
+  elemlist.forEach((element) => {
+    n_element = element.split("<")[1].split(">")[0].split(" ")[0];
+    if (!n_element.includes("/")) {
+      typelist = typelist + "|" + n_element;
+      list_element = document.createElement("option");
+      times = 0;
+      typelist.split("|").forEach((type) => {
+        if (type == n_element) times++;
+      });
+      list_element.innerHTML =
+        n_element + ": " + element.split(">")[1].split("</" + n_element)[0];
+      list_element.value = times;
+      list.appendChild(list_element);
+    }
+  });
+  set_select();
 }
 function focus() {
-  console.log("reload");
   update();
 }
 
@@ -45,7 +68,7 @@ function show_html() {
   textfield.rows = "25";
   textfield.cols = "120";
   textfield.placeholder = "HTML";
-  textfield.onchange = update_html;
+  textfield.onchange = update;
   document.body.insertBefore(textfield, document.getElementById("space"));
   refresh_txtareas();
 }
@@ -61,7 +84,7 @@ function show_css() {
   textfield.rows = "25";
   textfield.cols = "120";
   textfield.placeholder = "CSS";
-  textfield.onchange = update_css;
+  textfield.onchange = update;
   document.body.insertBefore(textfield, document.getElementById("space"));
   refresh_txtareas();
 }
@@ -106,7 +129,6 @@ function update_css() {
 
 function update_html() {
   set_html(document.getElementById("html_code").value);
-  console.log;
 }
 
 function set_css(value) {
@@ -181,4 +203,27 @@ function font_list() {
 
 function new_element() {
   open("popups/new.html", "New", "height=400,width=400,resizable=no");
+}
+
+var select;
+
+function set_select() {
+  type = document
+    .getElementById("move_elem")
+    .options[document.getElementById("move_elem").selectedIndex].text.split(
+      ":"
+    )[0];
+  num = document.getElementById("move_elem").value;
+  select = document
+    .getElementById("iframe")
+    .contentWindow.document.getElementsByTagName(type)[num - 1];
+}
+
+function move_up() {
+  select.insertBefore(select.previousElementSibling.previousElementSibling);
+}
+
+function move_down() {
+  select.nextElementSibling.appendChild(select);
+  update();
 }
