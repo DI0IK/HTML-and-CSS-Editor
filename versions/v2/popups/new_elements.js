@@ -119,8 +119,9 @@ function apply() {
   var o_html = localStorage.getItem("html-code");
   localStorage.setItem(
     "html-code",
-    o_html.split("</body>")[0] +
-      "<" +
+    (
+      o_html.split("</body>")[0] +
+      "\n<" +
       type.value +
       ">" +
       input_text.value +
@@ -128,7 +129,9 @@ function apply() {
       type.value +
       ">" +
       "\n</body>"
+    ).replace(/\n\s*\n/g, "\n")
   );
+  window.close();
 }
 
 function change_text() {
