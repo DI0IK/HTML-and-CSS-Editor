@@ -14,7 +14,7 @@ function onload() {
       localStorage.getItem("html-code");
   if (localStorage.getItem("css-code") != null)
     iframe.getElementById("style").innerHTML = localStorage.getItem("css-code");
-  updateFontList();
+  //updateFontList();
 }
 
 function show_advanced() {
@@ -235,5 +235,9 @@ function updateFontList() {
 }
 
 function upload() {
-  open("upload.html", "Upload", "height=400,width=400,resizable=no");
+  open("popups/upload.html", "Upload", "height=400,width=400,resizable=no");
+}
+
+function font_list() {
+  open("popups/fonts.html");
 }
