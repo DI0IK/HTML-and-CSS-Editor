@@ -15,6 +15,8 @@ function update() {
     update_html();
   }
   iframe = document.getElementById("iframe").contentWindow.document;
+  if (localStorage.getItem("html-code") == null)
+    localStorage.setItem("html-code", "<body></body>");
   if (localStorage.getItem("html-code") != null)
     iframe.documentElement.innerHTML =
       iframe.documentElement.innerHTML.split("</head>")[0] +
@@ -156,8 +158,8 @@ function autosave() {
 }
 
 function clear_page() {
-  localStorage.setItem("html-code", "");
-  localStorage.setItem("css-code", "");
+  localStorage.removeItem("html-code");
+  localStorage.removeItem("css-code");
   location.reload();
 }
 
@@ -220,10 +222,13 @@ function set_select() {
 }
 
 function move_up() {
-  select.insertBefore(select.previousElementSibling.previousElementSibling);
+  select.previousElementSibling.previousElementSibling.appendChild(select);
+  autosave();
+  update();
 }
 
 function move_down() {
   select.nextElementSibling.appendChild(select);
+  autosave();
   update();
 }
