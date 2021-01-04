@@ -220,18 +220,17 @@ function set_select() {
       ":"
     )[0];
   if (
-    type ==
-    ("p" ||
-      "h1" ||
-      "h2" ||
-      "h3" ||
-      "h4" ||
-      "h5" ||
-      "h6" ||
-      "a" ||
-      "li" ||
-      "button" ||
-      "other")
+    type == "p" ||
+    type == "h1" ||
+    type == "h2" ||
+    type == "h3" ||
+    type == "h4" ||
+    type == "h5" ||
+    type == "h6" ||
+    type == "a" ||
+    type == "li" ||
+    type == "button" ||
+    type == "other"
   ) {
     document.getElementById("edit_sele").hidden = false;
   } else {
@@ -276,19 +275,19 @@ function edit_select() {
     .options[document.getElementById("move_elem").selectedIndex].text.split(
       ":"
     )[0];
+  console.log(type);
   if (
-    type ==
-    ("p" ||
-      "h1" ||
-      "h2" ||
-      "h3" ||
-      "h4" ||
-      "h5" ||
-      "h6" ||
-      "a" ||
-      "li" ||
-      "button" ||
-      "other")
+    type == "p" ||
+    type == "h1" ||
+    type == "h2" ||
+    type == "h3" ||
+    type == "h4" ||
+    type == "h5" ||
+    type == "h6" ||
+    type == "a" ||
+    type == "li" ||
+    type == "button" ||
+    type == "other"
   ) {
     localStorage.setItem("select", select.outerHTML);
     open("popups/edit.html", "edit", "height=400,width=400,resizable=no");
