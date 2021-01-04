@@ -21,7 +21,7 @@ function update() {
     iframe.documentElement.innerHTML =
       iframe.documentElement.innerHTML.split("</head>")[0] +
       "</head>" +
-      localStorage.getItem("html-code");
+      localStorage.getItem("html-code").replace(/\n\s*\n/g, "\n");
   if (localStorage.getItem("css-code") != null)
     iframe.getElementById("style").innerHTML = localStorage.getItem("css-code");
   html_area = iframe.documentElement.innerHTML.split("</head>")[1];
@@ -153,7 +153,7 @@ function autosave() {
   var css = document
     .getElementById("iframe")
     .contentWindow.document.getElementById("style").innerHTML;
-  localStorage.setItem("html-code", html);
+  localStorage.setItem("html-code", html.replace("><", ">\n<"));
   localStorage.setItem("css-code", css);
 }
 
@@ -173,7 +173,7 @@ function download() {
       <link rel="stylesheet" href="style.css" />
     </head>\n`;
   var html_after = `\n</html>`;
-  var html_code = localStorage.getItem("html-code");
+  var html_code = localStorage.getItem("html-code").replace(/\n\s*\n/g, "\n");
   var css_code = localStorage.getItem("css-code");
   download_text("html.html", html_before + html_code + html_after);
   download_text("style.css", css_code);
@@ -222,13 +222,23 @@ function set_select() {
 }
 
 function move_up() {
-  select.previousElementSibling.previousElementSibling.appendChild(select);
-  autosave();
+  elem = select.outerHTML;
+  append_before = select.previousElementSibling.outerHTML;
+  o_html = localStorage.getItem("html-code").replace(/\n\s*\n/g, "\n");
+  localStorage.setItem(
+    "html-code",
+    o_html.replace(elem, "").replace(append_before, elem + "\n" + append_before)
+  );
   update();
 }
 
 function move_down() {
-  select.nextElementSibling.appendChild(select);
-  autosave();
+  elem = select.outerHTML;
+  append_after = select.nextElementSibling.outerHTML;
+  o_html = localStorage.getItem("html-code").replace(/\n\s*\n/g, "\n");
+  localStorage.setItem(
+    "html-code",
+    o_html.replace(elem, "").replace(append_after, append_after + "\n" + elem)
+  );
   update();
 }
