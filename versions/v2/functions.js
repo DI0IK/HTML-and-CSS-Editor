@@ -164,19 +164,23 @@ function clear_page() {
 }
 
 function download() {
-  var html_before = `<!DOCTYPE html>
+  var html_before =
+    `<!DOCTYPE html>
   <html lang="en">
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
+      <title>` +
+    document.getElementById("title").value +
+    `</title>
       <link rel="stylesheet" href="style.css" />
     </head>\n`;
   var html_after = `\n</html>`;
   var html_code = localStorage.getItem("html-code").replace(/\n\s*\n/g, "\n");
   var css_code = localStorage.getItem("css-code");
-  download_text("html.html", html_before + html_code + html_after);
-  download_text("style.css", css_code);
+  if (html_code != null)
+    download_text("html.html", html_before + html_code + html_after);
+  if (css_code != null) download_text("style.css", css_code);
 }
 
 function download_text(filename, text) {
@@ -215,6 +219,24 @@ function set_select() {
     .options[document.getElementById("move_elem").selectedIndex].text.split(
       ":"
     )[0];
+  if (
+    type ==
+    ("p" ||
+      "h1" ||
+      "h2" ||
+      "h3" ||
+      "h4" ||
+      "h5" ||
+      "h6" ||
+      "a" ||
+      "li" ||
+      "button" ||
+      "other")
+  ) {
+    document.getElementById("edit_sele").hidden = false;
+  } else {
+    document.getElementById("edit_sele").hidden = true;
+  }
   num = document.getElementById("move_elem").value;
   select = document
     .getElementById("iframe")
@@ -241,4 +263,34 @@ function move_down() {
     o_html.replace(elem, "").replace(append_after, append_after + "\n" + elem)
   );
   update();
+}
+
+function delete_selet() {
+  elem = select.outerHTML;
+  localStorage.setItem("html-code", o_html.replace(elem, ""));
+}
+
+function edit_select() {
+  type = document
+    .getElementById("move_elem")
+    .options[document.getElementById("move_elem").selectedIndex].text.split(
+      ":"
+    )[0];
+  if (
+    type ==
+    ("p" ||
+      "h1" ||
+      "h2" ||
+      "h3" ||
+      "h4" ||
+      "h5" ||
+      "h6" ||
+      "a" ||
+      "li" ||
+      "button" ||
+      "other")
+  ) {
+    localStorage.setItem("select", select.outerHTML);
+    open("popups/edit.html", "edit", "height=400,width=400,resizable=no");
+  }
 }

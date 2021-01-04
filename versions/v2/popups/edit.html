@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit element</title>
+    <script>
+      var selected;
+      var n_text;
+      function onload() {
+        selected = localStorage.getItem("select");
+        text = document.getElementById("text");
+        text.value = selected.split(">")[1].split("<")[0];
+      }
+      function edit_innerHTML() {
+        n_txt = localStorage
+          .getItem("html-code")
+          .replace(
+            selected,
+            selected.split(">")[0] +
+              ">" +
+              text.value +
+              "<" +
+              selected.split("<")[2]
+          );
+        localStorage.setItem("html-code", n_txt);
+        window.close();
+      }
+    </script>
+  </head>
+  <body onload="onload()">
+    <input type="text" name="Text" id="text" />
+    <button onclick="edit_innerHTML()">Save</button>
+  </body>
+</html>
