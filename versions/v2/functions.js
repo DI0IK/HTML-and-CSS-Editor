@@ -16,7 +16,7 @@ function update() {
   }
   iframe = document.getElementById("iframe").contentWindow.document;
   if (localStorage.getItem("html-code") == null)
-    localStorage.setItem("html-code", "<body></body>");
+    localStorage.setItem("html-code", "<body>\n</body>");
   if (localStorage.getItem("html-code") != null)
     iframe.documentElement.innerHTML =
       iframe.documentElement.innerHTML.split("</head>")[0] +
