@@ -26,6 +26,9 @@ function onload() {
   btn_apply = document.getElementById("btn_apply");
   type_list = document.getElementById("type");
   type_other = document.getElementById("type_other");
+  atr = document.getElementById("input_atr");
+  innerHTML = document.getElementById("innerHTML");
+  oth = document.getElementById("other");
   type_change();
 }
 
@@ -57,22 +60,6 @@ function type_change() {
     text_id.hidden = false;
     text_class.hidden = false;
     text_text.hidden = false;
-    text_src.hidden = true;
-    text_href.hidden = true;
-    type_other.hidden = true;
-  }
-  if (type_list.value == "ul") {
-    text_id.hidden = false;
-    text_class.hidden = false;
-    text_text.hidden = true;
-    text_src.hidden = true;
-    text_href.hidden = true;
-    type_other.hidden = true;
-  }
-  if (type_list.value == "ol") {
-    text_id.hidden = false;
-    text_class.hidden = false;
-    text_text.hidden = true;
     text_src.hidden = true;
     text_href.hidden = true;
     type_other.hidden = true;
@@ -117,37 +104,16 @@ function type_change() {
     text_href.hidden = true;
     type_other.hidden = true;
   }
-  if (type_list.value == "select") {
-    text_id.hidden = false;
-    text_class.hidden = false;
-    text_text.hidden = true;
-    text_src.hidden = true;
-    text_href.hidden = true;
-    type_other.hidden = true;
-  }
-  if (type_list.value == "option") {
-    text_id.hidden = false;
-    text_class.hidden = false;
-    text_text.hidden = false;
-    text_src.hidden = true;
-    text_href.hidden = true;
-    type_other.hidden = true;
-  }
-  if (type_list.value == "textarea") {
-    text_id.hidden = false;
-    text_class.hidden = false;
-    text_text.hidden = true;
-    text_src.hidden = true;
-    text_href.hidden = true;
-    type_other.hidden = true;
-  }
   if (type_list.value == "other") {
-    text_id.hidden = false;
-    text_class.hidden = false;
+    text_id.hidden = true;
+    text_class.hidden = true;
     text_text.hidden = true;
     text_src.hidden = true;
     text_href.hidden = true;
     type_other.hidden = false;
+    oth.hidden = false;
+  } else {
+    oth.hidden = true;
   }
   change_text();
 }
@@ -156,6 +122,11 @@ function apply() {
   var open_tag = "";
   var value = "";
   var close_tag = "";
+
+  if (type.value == "other") {
+    other();
+    return;
+  }
 
   open_tag += "<" + type.value;
   if (input_id.value != "") open_tag += ` id= "` + input_id.value + `"`;
@@ -181,6 +152,27 @@ function apply() {
       open_tag +
       value +
       close_tag +
+      "\n</body>"
+    ).replace(/\n\s*\n/g, "\n")
+  );
+  window.close();
+}
+
+function other() {
+  var o_html = localStorage.getItem("html-code");
+  localStorage.setItem(
+    "html-code",
+    (
+      o_html.split("</body>")[0] +
+      "\n<" +
+      type_other.value +
+      " " +
+      input_atr.innerHTML +
+      ">" +
+      innerHTML.value +
+      "</" +
+      type_other.value +
+      ">" +
       "\n</body>"
     ).replace(/\n\s*\n/g, "\n")
   );
@@ -216,6 +208,12 @@ function change_text() {
     text_href.hidden == false &&
     text_text.hidden == false
   ) {
+    document.getElementById("btn_apply").disabled = true;
+  }
+  if (type_other != "" && oth.hidden == false) {
+    document.getElementById("btn_apply").disabled = false;
+  }
+  if (type_other == "" && oth.hidden == false) {
     document.getElementById("btn_apply").disabled = true;
   }
 }

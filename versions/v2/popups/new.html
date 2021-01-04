@@ -6,6 +6,11 @@
     <title>New Element</title>
     <script src="new_elements.js"></script>
     <link rel="stylesheet" href="../style.css" />
+    <style>
+      ::placeholder {
+        zoom: 1;
+      }
+    </style>
   </head>
   <body onload="onload()">
     <p>
@@ -19,25 +24,14 @@
         <option value="h4">Title 4</option>
         <option value="h5">Title 5</option>
         <option value="h6">Title 6 (smalest)</option>
-        <option value="ul">List</option>
-        <option value="ol">List (numbered)</option>
         <option value="li">List element</option>
         <option value="a">Link</option>
         <option value="img">Image</option>
         <option value="iframe">iframe</option>
         <option value="button">Button</option>
-        <option value="select">Select list</option>
-        <option value="option">select option</option>
-        <option value="textarea">Textarea</option>
         <option value="other">other</option>
       </select>
-      <input
-        hidden
-        type="text"
-        name="other"
-        id="type_other"
-        placeholder="type"
-      />
+      <input hidden type="text" name="other" id="type_other" placeholder="" />
     </p>
     <p hidden id="text_text">
       Text:
@@ -89,6 +83,16 @@
         oninput="change_text()"
       />
     </p>
+    <div id="other">
+      <textarea
+        name="attributes"
+        id="input_atr"
+        cols="30"
+        rows="10"
+        placeholder="Attributes"
+      ></textarea>
+      <input type="text" id="innerHTML" />
+    </div>
     <p><button id="btn_apply" onclick="apply()" disabled>Apply</button></p>
   </body>
 </html>
