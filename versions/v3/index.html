@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Website Creator</title>
+		<style>
+			html,
+			body {
+				background-color: rgb(61, 61, 61);
+				color: rgb(219, 219, 219);
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				max-height: 100%;
+				width: 100%;
+				max-width: 100%;
+			}
+
+			select,
+			button,
+			input {
+				background-color: rgb(37, 37, 37);
+				color: rgb(219, 219, 219);
+				border: none;
+				outline: none;
+			}
+			select:hover,
+			button:hover,
+			input:hover {
+				background-color: rgb(77, 77, 77);
+				color: rgb(255, 255, 255);
+			}
+
+			:disabled {
+				background-color: rgb(37, 37, 37) !important;
+				color: rgb(219, 219, 219) !important;
+			}
+			:disabled::placeholder {
+				color: rgb(0, 0, 0);
+			}
+
+			::placeholder {
+				color: rgb(184, 184, 184);
+			}
+
+			iframe {
+				margin: 0.5em;
+				border-width: 0.1em;
+				border-style: solid;
+				width: 960px;
+				height: 540px;
+			}
+			#settings {
+				margin: 0.5em;
+			}
+			#dropDown {
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: rgb(37, 37, 37);
+			}
+			#dropDown button {
+				background-color: rgb(37, 37, 37);
+				color: rgb(219, 219, 219);
+				width: 100%;
+				display: block;
+				border: none;
+			}
+			#dropDown button:hover {
+				background-color: rgb(77, 77, 77);
+				color: rgb(255, 255, 255);
+			}
+
+			textarea {
+				background-color: rgb(34, 34, 34);
+				resize: none;
+				outline: none;
+				width: 32.8%;
+				padding: 0;
+			}
+			textarea:hover {
+				background-color: rgb(77, 77, 77);
+			}
+			textarea::placeholder {
+				text-align: center;
+				vertical-align: middle;
+				font-size: xx-large;
+				text-transform: uppercase;
+			}
+
+			#code {
+				position: absolute;
+				width: 100%;
+				white-space: nowrap;
+				bottom: 0;
+			}
+
+			#newElemSettings {
+				position: absolute;
+				top: 0;
+				left: 0;
+				padding: 0;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(37, 37, 37, 0.562);
+			}
+
+			#newElemSettings div {
+				position: relative;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background-color: rgb(68, 68, 68);
+				justify-content: center;
+				align-items: center;
+				align-content: center;
+				text-align: center;
+				width: fit-content;
+				padding: 1%;
+			}
+		</style>
+		<script src="./js/editor.js"></script>
+		<script defer src="./js/main.js"></script>
+	</head>
+	<body class="darkMode">
+		<iframe src="./editor.html" frameborder="0" id="editor"></iframe>
+		<div id="settings">
+			<button onclick="toggleCode()">Toggle Code Box</button>
+			<input
+				type="number"
+				name="Editor Height"
+				id="heightEditor"
+				placeholder="Editor Height"
+				class="size"
+				value="540"
+			/>
+			<input
+				type="number"
+				name="Editor Width"
+				id="widthEditor"
+				placeholder="Editor Width"
+				class="size"
+				value="960"
+			/>
+		</div>
+
+		<!--Code Box-->
+		<div id="code" hidden>
+			<textarea name="" id="" cols="60" rows="20" placeholder="HTML" readonly></textarea>
+			<textarea name="" id="" cols="60" rows="20" placeholder="CSS" readonly></textarea>
+			<textarea name="" id="" cols="60" rows="20" placeholder="JavaScript" readonly></textarea>
+		</div>
+
+		<!--Dropdown Menu-->
+		<div id="dropDown">
+			<button id="deleteElem">Delete</button>
+			<button id="addElem">New Element</button>
+			<button id="posElem">Set Position</button>
+			<button id="propsElem">Properties</button>
+		</div>
+
+		<!--New Element Popup-->
+		<div id="newElemSettings" hidden>
+			<div>
+				<section>Element Type:</section>
+				<select id="newElemType" onchange="updateElemSettings()">
+					<option value="none" selected></option>
+					<option value="p">Paragraph</option>
+					<option value="h1">Heading 1 (biggest)</option>
+					<option value="h2">Heading 2</option>
+					<option value="h3">Heading 3</option>
+					<option value="h4">Heading 4</option>
+					<option value="h5">Heading 5</option>
+					<option value="h6">Heading 6 (smallest)</option>
+					<option value="ul">Unordered List</option>
+					<option value="ol">Ordered List</option>
+					<option value="picture">Image</option>
+					<option value="div">Section (DIV)</option>
+					<option value="section">Section (section)</option>
+					<option value="button">Button</option>
+					<option value="input">Input Field</option>
+					<option value="iframe">Inline Frame</option>
+				</select>
+				<br />
+				<input type="text" name="" id="newElemInnerText" placeholder="Text" disabled />
+				<br />
+				<input type="url" name="" id="newElemSrcUrl" placeholder="source URL" disabled />
+				<br />
+				<input
+					type="url"
+					name=""
+					id="newElemPlaceholderText"
+					placeholder="placeholder Text"
+					disabled
+				/>
+				<br />
+				<br />
+				<button onclick="document.getElementById('newElemSettings').hidden=true">Cancel</button>
+				<button onclick="createElementBySettings()" disabled id="createElementBySettings">
+					Create
+				</button>
+			</div>
+		</div>
+	</body>
+</html>
